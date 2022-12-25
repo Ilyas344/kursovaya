@@ -1,30 +1,30 @@
 
 
 public class Main {
+    public static Employee[] employees = new Employee[10];
 
     public static void main(String[] args) {
-        Employee[] employees = new Employee[10];
+
         Employee ivanov = new Employee
-                ("Иванов", "Иван", "Иванович", 25000.0, 1);
+                ("Иванов", "Иван", "Иванович", 25000.5, 1);
         Employee petrov = new Employee
-                ("Петров", "Андрей", "Иванович", 35000.0, 2);
+                ("Петров", "Андрей", "Иванович", 35000.4, 2);
         Employee sidorov = new Employee
-                ("Сидоров", "Александр", "Иванович", 30000.0, 3);
+                ("Сидоров", "Александр", "Иванович", 30000.1, 3);
         employees[0] = ivanov;
         employees[1] = petrov;
         employees[2] = sidorov;
-        printEmpolyee(employees);
-        System.out.println("Сумма затрат за месяц " + sumSalary(employees));
-        searchMinEmployee(employees, searchMin(employees));
-        searchMaxEmployee(employees, searchMin(employees));
+        printEmpolyee();
+        System.out.println("Сумма затрат за месяц " + sumSalary());
+        searchMinEmployee();
+        searchMaxEmployee();
 
-        System.out.println("Средняя зарплата: " +
-                (searchAverageSalary(searchMaxGetId(employees), sumSalary(employees))));
-        printFullName(employees);
+        System.out.printf("Средняя зарплата: %.2f %n", searchAverageSalary());
+        printFullName();
 
     }
 
-    public static void printFullName(Employee[] employees) {
+    public static void printFullName() {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 System.out.println(employees[i].getSurname() + " "
@@ -33,7 +33,7 @@ public class Main {
         }
     }
 
-    public static void printEmpolyee(Employee[] employees) {
+    public static void printEmpolyee() {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 System.out.println(employees[i]);
@@ -41,7 +41,7 @@ public class Main {
         }
     }
 
-    public static double sumSalary(Employee[] employees) {
+    public static double sumSalary() {
         double sum = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
@@ -51,7 +51,7 @@ public class Main {
         return sum;
     }
 
-    public static double searchMin(Employee[] employees) {
+    public static double searchMin() {
         double min = Double.MAX_VALUE;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
@@ -61,7 +61,7 @@ public class Main {
         return min;
     }
 
-    public static double searchMax(Employee[] employees) {
+    public static double searchMax() {
         double max = Double.MIN_VALUE;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
@@ -71,10 +71,10 @@ public class Main {
         return max;
     }
 
-    public static void searchMinEmployee(Employee[] employees, double min) {
+    public static void searchMinEmployee() {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
-                if (searchMin(employees) == employees[i].getSalary()) {
+                if (searchMin() == employees[i].getSalary()) {
 
                     System.out.printf("Минимальная зарплата: %s\n", employees[i]);
                 }
@@ -82,29 +82,29 @@ public class Main {
         }
     }
 
-    public static void searchMaxEmployee(Employee[] employees, double max) {
+    public static void searchMaxEmployee() {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
-                if (searchMax(employees) == employees[i].getSalary()) {
+                if (searchMax() == employees[i].getSalary()) {
                     System.out.printf("Максимальная зарплата: %s\n", employees[i]);
                 }
             }
         }
     }
 
-    public static int searchMaxGetId(Employee[] employees) {
-        int MaxId = 0;
+    public static int searchMaxSalary() {
+        int maxSalary = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
-                MaxId++;
+                maxSalary++;
             }
         }
-        return MaxId;
+        return maxSalary;
     }
 
-    public static double searchAverageSalary(int MaxId, double sum) {
+    public static double searchAverageSalary() {
 
-        double averageSalary = sum / MaxId;
+        double averageSalary = sumSalary() / searchMaxSalary();
 
         return averageSalary;
     }

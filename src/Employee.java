@@ -20,6 +20,7 @@ public class Employee {
         this.department = department;
         id = COUNTER.getAndIncrement();
 
+
     }
 
     public String getSurname() {
